@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import SvgInput from './components/SvgInput.vue'
 import SvgPreview from './components/SvgPreview.vue'
 import CodeOutput from './components/CodeOutput.vue'
@@ -66,6 +66,30 @@ function handleDownload() {
   a.click()
   URL.revokeObjectURL(url)
 }
+
+// 全局粘贴监听
+function handleGlobalPaste(e: ClipboardEvent) {
+  const clipboardData = e.clipboardData
+  if (!clipboardData) return
+
+  // 获取粘贴的文本
+  const text = clipboardData.getData('text')
+  if (!text || !text.trim()) return
+
+  // 检测是否是 SVG 代码
+  if (text.includes('<svg') && text.includes('</svg>')) {
+    e.preventDefault()
+    handleSvgInput(text)
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('paste', handleGlobalPaste)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('paste', handleGlobalPaste)
+})
 </script>
 
 <template>
