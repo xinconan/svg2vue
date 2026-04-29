@@ -69,8 +69,10 @@ const svgDataUri = computed(() => {
 }
 
 .svg-image {
-  max-width: 200px;
-  max-height: 200px;
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
