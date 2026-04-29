@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { VueVersion } from '@/types'
 
-const props = defineProps<{
+defineProps<{
   code: string
   componentName: string
   vueVersion: VueVersion
