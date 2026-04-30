@@ -95,7 +95,8 @@ onUnmounted(() => {
 <template>
   <div class="app">
     <header class="header">
-      <h1>SVG to Vue Component Converter</h1>
+      <h1>SVG 转 Vue 组件</h1>
+      <p class="hint">🔒 所有处理均在本地完成，不会上传任何数据</p>
     </header>
 
     <main class="main">
@@ -152,6 +153,12 @@ body {
 .header h1 {
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+.header .hint {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
 }
 
 .main {
