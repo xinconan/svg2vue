@@ -55,6 +55,13 @@ function handlePaste() {
     textareaValue.value = ''
   }
 }
+
+function clear() {
+  textareaValue.value = ''
+  if (fileInput.value) fileInput.value.value = ''
+}
+
+defineExpose({ clear })
 </script>
 
 <template>

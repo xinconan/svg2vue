@@ -8,6 +8,7 @@ import { optimizeSvg } from './utils/svgoOptimizer'
 import { generateVueComponent, generateFileName } from './utils/vueGenerator'
 import type { VueVersion } from './types'
 
+const svgInputRef = ref<{ clear: () => void }>()
 const rawSvg = ref('')
 const optimizedSvg = ref('')
 const componentName = ref('SvgComponent')
@@ -53,6 +54,14 @@ async function handleSvgInput(svg: string, fileName?: string) {
   } finally {
     isLoading.value = false
   }
+}
+
+function handleClear() {
+  rawSvg.value = ''
+  optimizedSvg.value = ''
+  error.value = ''
+  componentName.value = 'SvgComponent'
+  svgInputRef.value?.clear()
 }
 
 function handleDownload() {
@@ -102,7 +111,7 @@ onUnmounted(() => {
     <main class="main">
       <div class="top-section">
         <div class="input-section">
-          <SvgInput @input="handleSvgInput" />
+          <SvgInput ref="svgInputRef" @input="handleSvgInput" />
         </div>
         <div class="preview-section">
           <SvgPreview :svg="optimizedSvg" :loading="isLoading" />
@@ -118,6 +127,7 @@ onUnmounted(() => {
           @update:component-name="componentName = $event"
           @update:vue-version="vueVersion = $event"
           @download="handleDownload"
+          @clear="handleClear"
         />
       </div>
     </main>

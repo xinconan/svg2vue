@@ -51,7 +51,7 @@ export function generateFileName(svgFileName: string): string {
 
   const pascalCase = nameWithoutExt
     .split(/[-_\s]+/)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join('')
 
   return `${pascalCase}.vue`
